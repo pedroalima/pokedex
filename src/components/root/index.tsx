@@ -7,12 +7,13 @@ function Root() {
     return (
         <div className="container-fluid" id="root">
             <Header />
-            <div className="row bg-custom">
-                <div className="col">
-                    <Outlet />
+            <div className="container pb-5">
+                <div className="row bg-custom">
+                    <div className="col-12">
+                        <Outlet />
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }
