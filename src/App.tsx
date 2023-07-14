@@ -1,5 +1,3 @@
-import "./App.scss"
-
 import Root from "./components/root"
 import Home from "./routes/home"
 import Pokedex from "./routes/pokedex"

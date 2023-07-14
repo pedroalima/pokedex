@@ -1,10 +1,18 @@
 import { Outlet } from "react-router-dom"
+import Header from "../header"
+
+import "./index.scss"
 
 function Root() {
     return (
-        <div>
-            <h1>Root</h1>
-            <Outlet />
+        <div className="container-fluid" id="root">
+            <Header />
+            <div className="row bg-custom">
+                <div className="col">
+                    <Outlet />
+                </div>
+            </div>
+
         </div>
     )
 }
