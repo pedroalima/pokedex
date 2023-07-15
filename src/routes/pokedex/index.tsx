@@ -1,23 +1,29 @@
+import { Pokemons } from "../../types/pokemons";
+
 import Card from "../../components/card";
 
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function Pokedex() {
-    // const [pokemons, setPokemons] = useState([]);
+    const [pokemons, setPokemons] = useState<[Pokemons] | []>([]);
 
-    // async function getAPI() {
-    //     const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=150&limit=150");
+    const getPokemons = async () => {
+        try {
+            const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10");
 
-    //     if (response.ok) {
-    //         const jsonResponse: Promise = await response.json();
-    //         console.log(jsonResponse);
-    //     }
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                console.log(jsonResponse)
+                setPokemons(jsonResponse.results);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-    // }
-
-    // useEffect(() => {
-    //     void getAPI()
-    // }, [])
+    useEffect(() => {
+        getPokemons()
+    }, [])
 
     return (
         <>
@@ -34,9 +40,12 @@ function Pokedex() {
                 </form>
             </div>
             <div className="row justify-content-center">
-                <Card />
-                <Card />
-                <Card />
+                {pokemons.map((pokemon: Pokemons, i: number) => (
+                    <div key={i} className="col-10 px-5 col-md-4">
+                        <Card name={pokemon.name} />
+                    </div>
+                ))}
+                
             </div>
         </>
     )
