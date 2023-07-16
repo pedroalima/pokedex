@@ -2,28 +2,31 @@ import { Pokemons } from "../../types/pokemons";
 
 import Card from "../../components/card";
 
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 function Pokedex() {
-    const [pokemons, setPokemons] = useState<[Pokemons] | []>([]);
+    const [pokemons, setPokemons] = useState<Pokemons[] | []>([]);
+
+    useEffect(() => {
+        void getPokemons()
+    }, [])
 
     const getPokemons = async () => {
-        try {
-            const response = await fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10");
+        const endpoints = [];
+        for (let i = 1; i <= 10; i++) {
+            endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`)
+        }
 
-            if (response.ok) {
-                const jsonResponse = await response.json();
-                console.log(jsonResponse)
-                setPokemons(jsonResponse.results);
-            }
-        } catch (error) {
-            console.log(error)
+        try {
+            await axios.all(endpoints.map((endpoint: any) => axios.get(endpoint))).then((res: any) => setPokemons(res))
+
+        } catch (error: any) {
+            console.log(error.message)
         }
     }
 
-    useEffect(() => {
-        getPokemons()
-    }, [])
+    console.log(pokemons)
 
     return (
         <>
@@ -40,12 +43,13 @@ function Pokedex() {
                 </form>
             </div>
             <div className="row justify-content-center">
-                {pokemons.map((pokemon: Pokemons, i: number) => (
-                    <div key={i} className="col-10 px-5 col-md-4">
-                        <Card name={pokemon.name} />
-                    </div>
-                ))}
-                
+                {
+                    pokemons.map((pokemon: Pokemons) => (
+                        <div key={pokemon.data.id} className="col-10 px-5 col-md-4">
+                            <Card image={pokemon.data.sprites.front_default} register={pokemon.data.id} name={pokemon.data.name} type1={pokemon.data.types[0].type.name} type2={pokemon.data.types[1] && pokemon.data.types[1].type.name} />
+                        </div>
+                    ))
+                }
             </div>
         </>
     )
