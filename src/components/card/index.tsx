@@ -1,13 +1,23 @@
-function Card({ image, register, name, type1, type2 }: { image: string, register: number, name: string, type1: string, type2: string }) {
+import "./index.scss"
+
+type Pokemon = {
+    id: number,
+    image: string,
+    name: string,
+    type1: string,
+    type2: string
+}
+
+function Card({ id, image, name, type1, type2 }: Pokemon) {
     return (
-        <div className="card m-3">
-            <img src={image} className="card-img-top" alt="" />
-            <div className="card-body">
-                <span>{register}</span>
+        <div className="card m-3 d-flex flex-column align-items-center" id="card">
+            <span className="align-self-start">#{id}</span>
+            <img src={image} className="card-img-top" alt={`Image ${name}`} />
+            <div className="card-body text-center">
                 <h5 className="card-title">{name}</h5>
-                <p className="card-text">{type1}</p>
+                <span className="mr-3">{type1}</span>
                 {type2 && (
-                    <p className="card-text">{type2}</p>
+                    <span>{type2}</span>
                 )}
             </div>
         </div>

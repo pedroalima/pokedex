@@ -1,32 +1,37 @@
-import { Pokemons } from "../../types/pokemons";
+import { PokemonsProps } from "../../types/pokemons";
 
 import Card from "../../components/card";
 
-import axios from "axios";
 import { useState, useEffect } from "react";
 
 function Pokedex() {
-    const [pokemons, setPokemons] = useState<Pokemons[] | []>([]);
+    const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
+    const [offset, setOffset] = useState(0)
 
     useEffect(() => {
         void getPokemons()
-    }, [])
+    }, [offset])
 
-    const getPokemons = async () => {
-        const endpoints = [];
-        for (let i = 1; i <= 10; i++) {
-            endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-        }
+    const getPokemons = async (limit = 50) => {
+        const URLbase = 'https://pokeapi.co/api/v2/'
 
         try {
-            await axios.all(endpoints.map((endpoint: any) => axios.get(endpoint))).then((res: any) => setPokemons(res))
+            const response = await fetch(`${URLbase}pokemon?limit=${limit}&offset=${offset}`);
+            const data = await response.json();
 
+            const promises = data.results.map(async (pokemon: any) => {
+                const response = await fetch(pokemon.url);
+                const jsonResponse = await response.json();
+                return jsonResponse;
+            })
+
+            const results = await Promise.all(promises)
+            setPokemons([...pokemons, ...results])
         } catch (error: any) {
             console.log(error.message)
         }
     }
 
-    console.log(pokemons)
 
     return (
         <>
@@ -43,13 +48,20 @@ function Pokedex() {
                 </form>
             </div>
             <div className="row justify-content-center">
-                {
-                    pokemons.map((pokemon: Pokemons) => (
-                        <div key={pokemon.data.id} className="col-10 px-5 col-md-4">
-                            <Card image={pokemon.data.sprites.front_default} register={pokemon.data.id} name={pokemon.data.name} type1={pokemon.data.types[0].type.name} type2={pokemon.data.types[1] && pokemon.data.types[1].type.name} />
-                        </div>
-                    ))
-                }
+                {pokemons.map((pokemon: PokemonsProps) => (
+                    <div key={pokemon.id} className="col-10 px-5 col-md-3 px-md-1">
+                        <Card
+                            id={pokemon.id}
+                            image={pokemon.sprites.other["official-artwork"].front_default}
+                            name={pokemon.name}
+                            type1={pokemon.types[0].type.name}
+                            type2={pokemon.types[1] && pokemon.types[1].type.name}
+                        />
+                    </div>
+                ))}
+                <div className="col-12 text-center">
+                    <button onClick={() => setOffset(offset + 50)}>Show More</button>
+                </div>
             </div>
         </>
     )
