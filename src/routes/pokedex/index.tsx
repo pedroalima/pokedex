@@ -2,36 +2,13 @@ import { PokemonsProps } from "../../types/pokemons";
 
 import Card from "../../components/card";
 
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function Pokedex() {
-    const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
-    const [offset, setOffset] = useState(0)
+function Pokedex({ pokemons, offset, setOffset }: { pokemons: PokemonsProps[] | [], offset: number, setOffset: any }) {
 
-    useEffect(() => {
-        void getPokemons()
-    }, [offset])
-
-    const getPokemons = async (limit = 50) => {
-        const URLbase = 'https://pokeapi.co/api/v2/'
-
-        try {
-            const response = await fetch(`${URLbase}pokemon?limit=${limit}&offset=${offset}`);
-            const data = await response.json();
-
-            const promises = data.results.map(async (pokemon: any) => {
-                const response = await fetch(pokemon.url);
-                const jsonResponse = await response.json();
-                return jsonResponse;
-            })
-
-            const results = await Promise.all(promises)
-            setPokemons([...pokemons, ...results])
-        } catch (error: any) {
-            console.log(error.message)
-        }
+    const handleClick = () => {
+        setOffset(offset + 50)
     }
-
 
     return (
         <>
@@ -49,7 +26,7 @@ function Pokedex() {
             </div>
             <div className="row justify-content-center">
                 {pokemons.map((pokemon: PokemonsProps) => (
-                    <div key={pokemon.id} className="col-10 px-5 col-md-3 px-md-1">
+                    <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id} className="col-10 px-1 col-md-3 px-md-1">
                         <Card
                             id={pokemon.id}
                             image={pokemon.sprites.other["official-artwork"].front_default}
@@ -57,10 +34,10 @@ function Pokedex() {
                             type1={pokemon.types[0].type.name}
                             type2={pokemon.types[1] && pokemon.types[1].type.name}
                         />
-                    </div>
+                    </Link>
                 ))}
                 <div className="col-12 text-center">
-                    <button onClick={() => setOffset(offset + 50)}>Show More</button>
+                    <button onClick={handleClick}>Show More</button>
                 </div>
             </div>
         </>

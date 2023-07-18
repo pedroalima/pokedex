@@ -12,9 +12,9 @@ function Card({ id, image, name, type1, type2 }: Pokemon) {
     return (
         <div className="card m-3 d-flex flex-column align-items-center" id="card">
             <span className="align-self-start">#{id}</span>
-            <img src={image} className="card-img-top" alt={`Image ${name}`} />
+            <img src={image} className="card-img-top image-custom" alt={`Image ${name}`} />
             <div className="card-body text-center">
-                <h5 className="card-title">{name}</h5>
+                <h5 className="card-title text-capitalize">{name}</h5>
                 <span className="mr-3">{type1}</span>
                 {type2 && (
                     <span>{type2}</span>
