@@ -1,11 +1,17 @@
-import { PokemonsProps } from "../../types/pokemons"
+import { useEffect } from "react";
+import { useParams } from "react-router-dom"
 
-function Pokemon({ pokemons }: { pokemons: PokemonsProps[] | [] }) {
+import { PokemonsProps } from "../../types/pokemons";
 
-    console.log(pokemons)
+function Pokemon({ getPokemonById, pokemon }: { getPokemonById: any, pokemon: PokemonsProps[] | [] }) {
+    const { id } = useParams();
+
+    useEffect(() => {
+        getPokemonById(id)
+    }, [id])
 
     return (
-        <div>Pokemon</div>
+        <div>{id}</div>
     )
 }
 

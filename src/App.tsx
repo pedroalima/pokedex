@@ -10,6 +10,7 @@ import { PokemonsProps } from "./types/pokemons"
 
 function App() {
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
+  const [pokemon, setPokemon] = useState<PokemonsProps[] | []>([])
   const [offset, setOffset] = useState(0)
 
   useEffect(() => {
@@ -36,13 +37,26 @@ function App() {
     void getPokemons()
   }, [offset])
 
+  const getPokemonById = async (id: number) => {
+    const urlBase = 'https://pokeapi.co/api/v2/';
+
+    try {
+      const response = await fetch(`${urlBase}pokemon/${id}/`);
+      const data = await response.json();
+      setPokemon(data)
+
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }
+
   return (
     <>
       <RouterProvider router={createBrowserRouter(createRoutesFromElements(
         <Route path="/" element={<Root />}>
           <Route path="/" element={<Home />} />
           <Route path="/pokedex" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
-          <Route path="/pokemon/:id" element={<Pokemon pokemons={pokemons} />} />
+          <Route path="/pokemon/:id" element={<Pokemon getPokemonById={getPokemonById} pokemon={pokemon} />} />
         </Route>
       ))} />
     </>
