@@ -10,7 +10,6 @@ import { PokemonsProps } from "./types/pokemons"
 
 function App() {
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
-  const [pokemon, setPokemon] = useState<PokemonsProps[] | []>([])
   const [offset, setOffset] = useState(0)
 
   useEffect(() => {
@@ -37,6 +36,8 @@ function App() {
     void getPokemons()
   }, [offset])
 
+  const [pokemon, setPokemon] = useState<any | []>([])
+
   const getPokemonById = async (id: number) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
@@ -56,7 +57,7 @@ function App() {
         <Route path="/" element={<Root />}>
           <Route path="/" element={<Home />} />
           <Route path="/pokedex" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
-          <Route path="/pokemon/:id" element={<Pokemon getPokemonById={getPokemonById} pokemon={pokemon} />} />
+          <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} getPokemonById={getPokemonById} />} />
         </Route>
       ))} />
     </>

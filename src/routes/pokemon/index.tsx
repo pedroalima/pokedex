@@ -1,17 +1,25 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
 
-import { PokemonsProps } from "../../types/pokemons";
+// import { PokemonsProps } from "../../types/pokemons";
 
-function Pokemon({ getPokemonById, pokemon }: { getPokemonById: any, pokemon: PokemonsProps[] | [] }) {
+import "./index.scss"
+
+function Pokemon({ pokemon, getPokemonById }: { pokemon: { name: string }, getPokemonById: any }) {
     const { id } = useParams();
 
     useEffect(() => {
         getPokemonById(id)
     }, [id])
 
+    console.log(pokemon)
+
     return (
-        <div>{id}</div>
+        <div className="rol">
+            <h2 className="text-capitalize">{pokemon.name}</h2>
+            <div className="col">
+            </div>
+        </div>
     )
 }
 

@@ -1,6 +1,13 @@
 export type PokemonsProps = {
     id: number,
-    sprites: any,
     name: string,
-    types: any,
+    sprites: {
+        front_default: string,
+        other: {
+            "official-artwork": {
+                front_default: string
+            }
+        }
+    },
+    types: any
 }
