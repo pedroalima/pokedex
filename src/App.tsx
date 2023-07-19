@@ -1,5 +1,4 @@
 import Root from "./components/root"
-import Home from "./routes/home"
 import Pokedex from "./routes/pokedex"
 import Pokemon from "./routes/pokemon"
 
@@ -55,8 +54,7 @@ function App() {
     <>
       <RouterProvider router={createBrowserRouter(createRoutesFromElements(
         <Route path="/" element={<Root />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/pokedex" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
+          <Route path="/" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
           <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} getPokemonById={getPokemonById} />} />
         </Route>
       ))} />
