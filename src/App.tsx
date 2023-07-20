@@ -11,37 +11,37 @@ function App() {
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
   const [offset, setOffset] = useState(0)
 
-  useEffect(() => {
-    const getPokemons = async (limit = 50) => {
-      const URLbase = 'https://pokeapi.co/api/v2/';
+  const getPokemons = async (limit = 50) => {
+    const URLbase = 'https://pokeapi.co/api/v2/';
 
-      try {
-        const response = await fetch(`${URLbase}pokemon?limit=${limit}&offset=${offset}`);
-        const data = await response.json();
+    try {
+      const response = await fetch(`${URLbase}pokemon?limit=${limit}&offset=${offset}`);
+      const data = await response.json();
 
-        const promises = data.results.map(async (pokemon: any) => {
-          const response = await fetch(pokemon.url);
-          const jsonResponse = await response.json();
-          return jsonResponse;
-        })
+      const promises = data.results.map(async (pokemon: any) => {
+        const response = await fetch(pokemon.url);
+        const jsonResponse = await response.json();
+        return jsonResponse;
+      })
 
-        const results = await Promise.all(promises)
-        setPokemons([...pokemons, ...results])
-      } catch (error: any) {
-        console.log(error.message)
-      }
+      const results = await Promise.all(promises)
+      setPokemons([...pokemons, ...results])
+    } catch (error: any) {
+      console.log(error.message)
     }
+  }
 
+  useEffect(() => {
     void getPokemons()
   }, [offset])
 
   const [pokemon, setPokemon] = useState<any | []>([])
 
-  const getPokemonById = async (id: number) => {
+  const getPokemonById = async (identifier: number | string) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
-      const response = await fetch(`${urlBase}pokemon/${id}/`);
+      const response = await fetch(`${urlBase}pokemon/${identifier}/`);
       const data = await response.json();
       setPokemon(data)
 
@@ -53,7 +53,7 @@ function App() {
   return (
     <>
       <RouterProvider router={createBrowserRouter(createRoutesFromElements(
-        <Route path="/" element={<Root />}>
+        <Route path="/" element={<Root pokemons={pokemons} setPokemons={setPokemons} getPokemons={getPokemons} />}>
           <Route path="/" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
           <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} getPokemonById={getPokemonById} />} />
         </Route>
