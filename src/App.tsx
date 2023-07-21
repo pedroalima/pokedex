@@ -1,21 +1,46 @@
-import Root from "./components/root"
-import Pokedex from "./routes/pokedex"
-import Pokemon from "./routes/pokemon"
+import Root from "./components/root";
+import Pokedex from "./routes/pokedex";
+import Search from "./routes/search";
+import Pokemon from "./routes/pokemon";
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import { useState, useEffect } from "react";
 
-import { PokemonsProps } from "./types/pokemons"
+import { PokemonsProps, AllPokemons } from "./types/pokemons"
 
 function App() {
+  const [allPokemons, setAllPokemons] = useState<AllPokemons[] | []>([]);
+  const [searchValue, setSearchValue] = useState<number | string>("")
+
+  const getAllPokemons = async () => {
+    const urlBase = 'https://pokeapi.co/api/v2/';
+
+    try {
+      const response = await fetch(`${urlBase}pokemon?limit=479&offset=0`);
+      const data = await response.json();
+
+      const promises = data.results.map(async (pokemon: any) => {
+        const response = await fetch(pokemon.url);
+        const jsonResponse = await response.json();
+        return jsonResponse;
+      })
+
+      const results = await Promise.all(promises)
+      setAllPokemons(results)
+
+    } catch (error: any) {
+      console.log(error.message)
+    }
+  }
+
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
   const [offset, setOffset] = useState(0)
 
-  const getPokemons = async (limit = 50) => {
-    const URLbase = 'https://pokeapi.co/api/v2/';
+  const getFirstFiftyPokemons = async (limit = 50) => {
+    const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
-      const response = await fetch(`${URLbase}pokemon?limit=${limit}&offset=${offset}`);
+      const response = await fetch(`${urlBase}pokemon?limit=${limit}&offset=${offset}`);
       const data = await response.json();
 
       const promises = data.results.map(async (pokemon: any) => {
@@ -32,7 +57,7 @@ function App() {
   }
 
   useEffect(() => {
-    void getPokemons()
+    void getFirstFiftyPokemons()
   }, [offset])
 
   const [pokemon, setPokemon] = useState<any | []>([])
@@ -53,8 +78,9 @@ function App() {
   return (
     <>
       <RouterProvider router={createBrowserRouter(createRoutesFromElements(
-        <Route path="/" element={<Root pokemons={pokemons} setPokemons={setPokemons} getPokemons={getPokemons} />}>
+        <Route path="/" element={<Root searchValue={searchValue} setSearchValue={setSearchValue} />}>
           <Route path="/" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
+          <Route path="/search" element={<Search allPokemons={allPokemons} searchValue={searchValue} getAllPokemons={getAllPokemons} />} />
           <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} getPokemonById={getPokemonById} />} />
         </Route>
       ))} />

@@ -1,17 +1,26 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import logo2 from "../../assets/images/logo2.png"
 
 import "./index.scss"
 
-function Header({ pokemonFilter }: { pokemonFilter: any }) {
+function Header({ searchValue, setSearchValue }: { searchValue: string | number, setSearchValue: any }) {
+    const navigate = useNavigate()
 
     const handleChange = (e: { target: { value: string } }) => {
-        pokemonFilter(e.target.value)
+        if (e.target.value === "") {
+            navigate("/")
+        } else {
+            setSearchValue(e.target.value)
+        }
     }
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
+
+        if (searchValue) {
+            navigate("/search")
+        }
     }
 
     return (
