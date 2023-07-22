@@ -12,7 +12,7 @@ function Pokedex({ pokemons, offset, setOffset }: { pokemons: PokemonsProps[] | 
     }
 
     return (
-        <div id="pokedex">
+        <section id="pokedex">
             <div className="row">
                 <div className="col jumbotron bg-transparent px-5 py-2">
                     <h1 className="display-4">Pokedex</h1>
@@ -37,7 +37,7 @@ function Pokedex({ pokemons, offset, setOffset }: { pokemons: PokemonsProps[] | 
                     <button onClick={handleClick}>Show More</button>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

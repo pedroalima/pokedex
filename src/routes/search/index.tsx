@@ -4,10 +4,11 @@ import { Link } from "react-router-dom"
 import Card from "../../components/card"
 
 function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: any, searchValue: string | number, getAllPokemons: any }) {
+    
     useEffect(() => {
         getAllPokemons()
-    }, [searchValue])
-
+    }, [])
+    
     let filterPokemons = [];
 
     if (typeof searchValue === "string") {

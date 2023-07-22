@@ -4,23 +4,20 @@ import logo2 from "../../assets/images/logo2.png"
 
 import "./index.scss"
 
-function Header({ searchValue, setSearchValue }: { searchValue: string | number, setSearchValue: any }) {
+function Header({ setSearchValue }: { setSearchValue: any }) {
     const navigate = useNavigate()
 
     const handleChange = (e: { target: { value: string } }) => {
         if (e.target.value === "") {
             navigate("/")
         } else {
+            navigate("/search")
             setSearchValue(e.target.value)
         }
     }
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-
-        if (searchValue) {
-            navigate("/search")
-        }
     }
 
     return (
