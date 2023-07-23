@@ -22,16 +22,16 @@ function Header({ setSearchValue }: { setSearchValue: any }) {
 
     return (
         <div className='container p-0' id="header">
-            <nav className="navbar navbar-light bg-transparent">
+            <nav className="navbar navbar-light bg-transparent justify-content-center justify-content-md-between px-0">
                 <NavLink to="/" className="nav-link f-st-color">
                     <img src={logo2} alt="Logo" className="image-custom" />
                 </NavLink>
                 <form
-                    className="form-inline"
+                    className="form-inline w-custom"
                     onSubmit={handleSubmit}
                 >
                     <input
-                        className="form-control mr-sm-2"
+                        className="form-control w-100"
                         type="search"
                         placeholder="Search..."
                         aria-label="Search"

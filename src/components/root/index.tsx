@@ -8,7 +8,7 @@ function Root({ setSearchValue }: { setSearchValue: any }) {
     return (
         <div className="container-fluid" id="root">
             <Header setSearchValue={setSearchValue} />
-            <div className="container pb-5">
+            <div className="container pb-3">
                 <div className="row bg-custom">
                     <div className="col-12">
                         <Outlet />

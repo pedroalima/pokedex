@@ -8,6 +8,14 @@
 
     }
 
+    .w-custom {
+        width: 100%;
+
+        @media screen and (min-width: 698px) {
+            width: 30%;
+        }
+    }
+
     .active {
         background: rgba(37, 17, 7, 0.1);
         border-bottom: 3px solid rgb(238, 107, 47);

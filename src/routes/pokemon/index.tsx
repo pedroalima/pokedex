@@ -36,17 +36,17 @@ function Pokemon({ pokemon, getPokemonById }: { pokemon: PokemonT, getPokemonByI
                     <img src={pokemon.sprites && pokemon.sprites.front_default} alt={`${pokemon.name} image`} />
                 </div>
             </div>
-            <div className="row flex-column flex-md-row align-items-center">
-                <div className="col col-md-6 text-center">
+            <div className="row flex-column flex-md-row justify-content-md-around align-items-center">
+                <div className="col col-md-5 text-center">
                     <img
                         src={pokemon.sprites && pokemon.sprites.other["official-artwork"].front_default}
                         alt={`${pokemon.name} image`}
-                        className="w-75"
+                        className="w-100"
                     />
                 </div>
                 <div className="col col-md-6">
-                    <div className="row flex-column flex-md-row align-items-center align-items-md-start text-center text-md-left">
-                        <div className="col-12 col-md-5">
+                    <div className="row flex-column flex-md-row justify-content-md-around align-items-center align-items-md-start text-center">
+                        <div className="col-12 col-md-5 bg-nd-color border rounded p-3 my-3 my-md-0">
                             <h4>Information</h4>
                             <div>
                                 <p>Height: {pokemon.height / 10} m</p>
@@ -81,8 +81,8 @@ function Pokemon({ pokemon, getPokemonById }: { pokemon: PokemonT, getPokemonByI
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 col-md-7">
-                            <h4>Status</h4>
+                        <div className="col-12 col-md-6 bg-nd-color border rounded p-3 my-3 mb-4 my-md-0">
+                            <h4 className="text-center">Status</h4>
                             <div>
                                 {pokemon.stats && pokemon.stats.map((stat: { base_stat: number, stat: { name: string } }, i) => (
                                     <div key={i} className="d-flex justify-content-between">
