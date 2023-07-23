@@ -33,7 +33,8 @@ function Card({ id, image, name, type1, type2 }: Pokemon) {
                                                                             type1 === "steel" ? "bg-steel rounded px-2 text-white" :
                                                                                 type1 === "ice" ? "bg-ice rounded px-2 text-white" :
                                                                                     type1 === "ghost" ? "bg-ghost rounded px-2 text-white" :
-                                                                                        type1 === "dragon" ? "bg-dragon rounded px-2 text-white" : "rounded px-2 text-white"}>{type1}</span>
+                                                                                        type1 === "dark" ? "bg-dark rounded px-2 text-white" :
+                                                                                            type1 === "dragon" ? "bg-dragon rounded px-2 text-white" : "rounded px-2 text-white"}>{type1}</span>
                     {type2 && (
                         <span className={
                             type2 === "grass" ? "bg-grass rounded px-2 text-white" :
@@ -52,7 +53,8 @@ function Card({ id, image, name, type1, type2 }: Pokemon) {
                                                                                 type2 === "steel" ? "bg-steel rounded px-2 text-white" :
                                                                                     type2 === "ice" ? "bg-ice rounded px-2 text-white" :
                                                                                         type2 === "ghost" ? "bg-ghost rounded px-2 text-white" :
-                                                                                            type2 === "dragon" ? "bg-dragon rounded px-2 text-white" : "rounded px-2 text-white"}>{type2}</span>
+                                                                                            type2 === "dark" ? "bg-dark rounded px-2 text-white" :
+                                                                                                type2 === "dragon" ? "bg-dragon rounded px-2 text-white" : "rounded px-2 text-white"}>{type2}</span>
                     )}
                 </div>
             </div>

@@ -71,7 +71,8 @@ function Pokemon({ pokemon, getPokemonById }: { pokemon: PokemonT, getPokemonByI
                                                                                                     type.type.name === "steel" ? "bg-steel rounded" :
                                                                                                         type.type.name === "ice" ? "bg-ice rounded" :
                                                                                                             type.type.name === "ghost" ? "bg-ghost rounded" :
-                                                                                                                type.type.name === "dragon" ? "bg-dragon rounded" : "rounded"}
+                                                                                                                type.type.name === "dark" ? "bg-dark rounded" :
+                                                                                                                    type.type.name === "dragon" ? "bg-dragon rounded" : "rounded"}
                                             key={i}
                                         >
                                             <p className="m-0 px-2 py-1 text-light">{type.type.name}</p>

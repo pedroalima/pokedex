@@ -36,7 +36,7 @@ function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: All
                         {filteredPokemons.map((pokemon: AllPokemons) => (
                             <Link
                                 to={`/pokemon/${pokemon.id}`} key={pokemon.id}
-                                className="col-10 mx-1 col-md-2 m-md-2 px-md-0 rounded link-custom">
+                                className="col-10 mx-1 col-md-3 m-md-2 px-md-0 rounded link-custom">
                                 <Card
                                     id={pokemon.id}
                                     image={pokemon.sprites.other["official-artwork"].front_default}
