@@ -12,11 +12,12 @@ function App() {
   const [allPokemons, setAllPokemons] = useState<AllPokemons[] | []>([]);
   const [searchValue, setSearchValue] = useState<number | string>("")
 
+  // Get all Pokemons
   const getAllPokemons = async () => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
-      const response = await fetch(`${urlBase}pokemon?limit=479&offset=50`);
+      const response = await fetch(`${urlBase}pokemon?limit=100000&offset=0`);
       const data = await response.json();
 
       const promises = data.results.map(async (pokemon: any) => {
@@ -36,6 +37,7 @@ function App() {
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
   const [offset, setOffset] = useState(0)
 
+  // Get first fifty Pokemons
   const getFirstFiftyPokemons = async (limit = 50) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
@@ -62,6 +64,7 @@ function App() {
 
   const [pokemon, setPokemon] = useState<any | []>([])
 
+  // Get Pokemon by ID
   const getPokemonById = async (identifier: number | string) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
@@ -78,7 +81,7 @@ function App() {
   return (
     <>
       <RouterProvider router={createBrowserRouter(createRoutesFromElements(
-        <Route path="/" element={<Root searchValue={searchValue} setSearchValue={setSearchValue} />}>
+        <Route path="/" element={<Root setSearchValue={setSearchValue} />}>
           <Route path="/" element={<Pokedex pokemons={pokemons} offset={offset} setOffset={setOffset} />} />
           <Route path="/search" element={<Search allPokemons={allPokemons} searchValue={searchValue} getAllPokemons={getAllPokemons} />} />
           <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} getPokemonById={getPokemonById} />} />
