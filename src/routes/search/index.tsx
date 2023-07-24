@@ -3,16 +3,19 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import Card from "../../components/card"
 
-function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: AllPokemons[] | [], searchValue: string | number, getAllPokemons: any }) {
+function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: AllPokemons[] | [], searchValue: any, getAllPokemons: any }) {
 
     useEffect(() => {
-        getAllPokemons()
-    }, [])
+        void getAllPokemons()
+    }, []);
 
     let filteredPokemons: AllPokemons[] | [] = [];
 
-    if (typeof searchValue === "string") {
-        filteredPokemons = allPokemons.filter((pokemon: AllPokemons) => pokemon.name.includes(searchValue))
+    if (isNaN(searchValue)) {
+        filteredPokemons = allPokemons.filter((pokemon: AllPokemons) => pokemon.name.includes(searchValue));
+    } else {
+        const searchNumber = parseInt(searchValue, 10)
+        filteredPokemons = allPokemons.filter((pokemon: AllPokemons) => pokemon.id === searchNumber);
     }
 
     return (
