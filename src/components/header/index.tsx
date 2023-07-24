@@ -1,18 +1,21 @@
 import { NavLink, useNavigate } from "react-router-dom"
+import { AllPokemons } from "../../types/pokemons"
 
 import logo2 from "../../assets/images/logo2.png"
 
 import "./index.scss"
 
-function Header({ setSearchValue }: { setSearchValue: any }) {
+function Header({ setSearchValue, allPokemons, searchValue, filteredPokemons }: { setSearchValue: any, allPokemons: AllPokemons[] | [], searchValue: string, filteredPokemons: AllPokemons[] | [] }) {
     const navigate = useNavigate()
 
     const handleChange = (e: { target: { value: string | number } }) => {
         if (e.target.value === "") {
-            navigate("/")
+            navigate("/");
         } else {
-            navigate("/search")
-            setSearchValue(e.target.value)
+            navigate("/search");
+            setSearchValue(e.target.value);
+            filteredPokemons = allPokemons.filter((pokemon: AllPokemons) => pokemon.name.includes(searchValue));
+            console.log(filteredPokemons);
         }
     }
 

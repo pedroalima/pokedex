@@ -3,17 +3,11 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import Card from "../../components/card"
 
-function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: AllPokemons[] | [], searchValue: string | number, getAllPokemons: any }) {
+function Search({ getAllPokemons, filteredPokemons }: { getAllPokemons: any, filteredPokemons: AllPokemons[] | [] }) {
 
     useEffect(() => {
         getAllPokemons()
     }, [])
-
-    let filteredPokemons: AllPokemons[] | [] = [];
-
-    if (typeof searchValue === "string") {
-        filteredPokemons = allPokemons.filter((pokemon: AllPokemons) => pokemon.name.includes(searchValue))
-    }
 
     return (
         <div id="pokedex">
