@@ -17,7 +17,7 @@ function App() {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
-      const response = await fetch(`${urlBase}pokemon?limit=500&offset=0`);
+      const response = await fetch(`${urlBase}pokemon?limit=750&offset=0`);
       const data = await response.json();
 
       const promises = data.results.map(async (pokemon: any) => {

@@ -15,7 +15,7 @@ function Card({ id, image, name, type1, type2 }: Pokemon) {
             <img src={image} className="card-img-top image-custom" alt={`Image ${name}`} />
             <div className="card-body text-center w-100">
                 <h5 className="card-title text-capitalize">{name}</h5>
-                <div className="d-flex justify-content-md-around">
+                <div className="d-flex justify-content-around">
                     <span className={
                         type1 === "grass" ? "bg-grass rounded px-2 text-white" :
                             type1 === "poison" ? "bg-poison rounded px-2 text-white" :
