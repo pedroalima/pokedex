@@ -22,16 +22,16 @@ function Search({ allPokemons, searchValue, getAllPokemons }: { allPokemons: All
         <div id="pokedex">
             {filteredPokemons.length === 0 ? (
                 <div className="row">
-                    <div className="col jumbotron bg-transparent px-5 py-2">
-                        <h1 className="display-5">Searching results...</h1>
+                    <div className="col jumbotron bg-transparent px-md-5 py-md-4">
+                        <h2>Searching results...</h2>
                         <hr className="my-4" />
                     </div>
                 </div>
             ) : (
                 <>
                     <div className="row">
-                        <div className="col jumbotron bg-transparent px-5 py-2">
-                            <h1 className="display-5">About {filteredPokemons.length} results</h1>
+                        <div className="col jumbotron bg-transparent px-md-5 py-md-4">
+                            <h2>About {filteredPokemons.length} results</h2>
                             <hr className="my-4" />
                         </div>
                     </div>

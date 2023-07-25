@@ -31,14 +31,12 @@ function Header({ setSearchValue }: { setSearchValue: any }) {
                     <input
                         className="form-control w-100"
                         type="search"
-                        placeholder="Search..."
+                        placeholder="Search for name or ID..."
                         aria-label="Search"
                         onChange={handleChange}
                     />
                 </form>
             </nav>
-
-
         </div>
     )
 }

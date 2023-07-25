@@ -12,12 +12,17 @@ function App() {
   const [allPokemons, setAllPokemons] = useState<AllPokemons[] | []>([]);
   const [searchValue, setSearchValue] = useState<any>();
 
-  // Get all Pokemons
+  /*
+   * Requests all Pokemons.
+   * 
+   * @returns void
+   * 
+   */
   const getAllPokemons = async () => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
-      const response = await fetch(`${urlBase}pokemon?limit=750&offset=0`);
+      const response = await fetch(`${urlBase}pokemon?limit=900&offset=0`);
       const data = await response.json();
 
       const promises = data.results.map(async (pokemon: any) => {
@@ -37,8 +42,14 @@ function App() {
   const [pokemons, setPokemons] = useState<PokemonsProps[] | []>([]);
   const [offset, setOffset] = useState(0)
 
-  // Get first fifty Pokemons
-  const getFirstFiftyPokemons = async (limit = 50) => {
+  /*
+   * Requests first fifty Pokemons.
+   * 
+   * @param limit - Already defined as number
+   * @returns void
+   * 
+   */
+  const getFirstFiftyPokemons = async (limit = 30) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
     try {
@@ -64,7 +75,13 @@ function App() {
 
   const [pokemon, setPokemon] = useState<any | []>([])
 
-  // Get Pokemon by ID
+  /*
+   * Requests Pokemon by name or ID.
+   * 
+   * @param identifier - Input string or number
+   * @returns void
+   * 
+   */
   const getPokemonById = async (identifier: number | string) => {
     const urlBase = 'https://pokeapi.co/api/v2/';
 
@@ -77,7 +94,6 @@ function App() {
       console.log(error.message)
     }
   }
-
 
   return (
     <>

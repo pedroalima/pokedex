@@ -8,15 +8,29 @@ import "./index.scss"
 function Pokedex({ pokemons, offset, setOffset }: { pokemons: PokemonsProps[] | [], offset: number, setOffset: any }) {
 
     const handleClick = () => {
-        setOffset(offset + 50)
+        setOffset(offset + 30)
     }
 
     return (
         <section id="pokedex">
             <div className="row">
-                <div className="col jumbotron bg-transparent px-5 py-2">
-                    <h1 className="display-4">Pokedex</h1>
-                    <hr className="my-4" />
+                <div className="col jumbotron bg-transparent text-right px-5 py-4">
+                    <img
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif`}
+                        className="pokemon-gif"
+                        alt="Gif Pokemon Bulbasaur"
+                    />
+                    <img
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif`}
+                        className="pokemon-gif"
+                        alt="Gif Pokemon Charmander"
+                    />
+                    <img
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/7.gif`}
+                        className="pokemon-gif"
+                        alt="Gif Pokemon Squirtle"
+                    />
+                    <hr className="my-0" />
                 </div>
             </div>
             <div className="row justify-content-center">

@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom"
 
+import { BsArrow90DegUp } from 'react-icons/bs';
+
 import Header from "../header"
 
 import "./index.scss"
@@ -15,6 +17,11 @@ function Root({ setSearchValue }: { setSearchValue: any }) {
                     </div>
                 </div>
             </div>
+            <a href={"#header"}>
+                <button className="button-custom">
+                    <BsArrow90DegUp />
+                </button>
+            </a>
         </div>
     )
 }
