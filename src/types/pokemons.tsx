@@ -25,3 +25,20 @@ export type AllPokemons = {
     },
     types: any
 }
+
+export type PokemonT = {
+    name: string,
+    id: number,
+    height: number,
+    weight: number,
+    types: [],
+    sprites: {
+        "front_default": string,
+        other: {
+            "official-artwork": {
+                "front_default": string,
+            },
+        },
+    },
+    stats: [],
+}

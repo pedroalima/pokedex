@@ -1,6 +1,6 @@
-Bem-vindo a Pokedex, um aplicativo para entusiastas que desejam explorar o mundo Pokémon. Com uma interface intuitiva e amigável, a Pokedex oferece uma extensa base de dados com informações detalhadas sobre todos os Pokémon conhecidos, desde os clássicos até os mais raros. Você poderá descobrir informações e curiosidades de cada criatura. Além disso, nosso sistema de busca avançada permite filtrar os Pokémons com base em nome e ID.
+Bem-vindo a Pokedex, um aplicativo para entusiastas que desejam explorar o mundo Pokémon. Com uma interface intuitiva e amigável, a Pokedex oferece uma extensa base de dados com informações detalhadas sobre todos os Pokémon conhecidos, desde os clássicos até os mais raros. Você poderá descobrir informações e curiosidades de cada criatura. Além disso, nosso sistema de busca que permite filtrar os Pokémons com base em nome e ID.
 
-Projeto de autoria própria, com desing e features inspirados em outras aplicações já existentes. Desenvolvido com TypeScript, React e Bootstrap. E esse foi o meu resultado final 💻<https://pokedex-eta-olive.vercel.app/>.
+Um projeto de autoria própria, com desing e features inspirados em outras aplicações já existentes. Desenvolvido com TypeScript, React e Bootstrap. E esse foi o meu resultado final 💻<https://pokedex-eta-olive.vercel.app/>.
 
 ![#](./public/Pokedex1.png)
 
@@ -45,73 +45,53 @@ Os usuários devem ser capazes de:
 
 TypeScript é uma linguagem que adiciona tipos ao JavaScript. Ele nos permite escrever JavaScript, mas adicionando tipos, que pode detectar possíveis bugs, esclarecer a estrutura e ajudar a refatorar nosso código. 
 
+Este projeto possibilitou me introduzir ao superset do JavaScript, muitos conceitos foram abordados e citarei alguns deles ao longo deste artigo.
 
-
-<!-- React.ts
+React.ts
 ```js
 ...
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { object, string } from 'yup';
-...
-const {
-  register,
-  handleSubmit: onSubmit,
-  formState: { errors },
-} = useForm({ resolver: yupResolver(schema) })
-...
-...
-<input
-  {...register('name')} 
-  id='name'
-  type='text'
-  placeholder='e.g. Stephen King'
-/>
+let x: number;
 ...
 ```
 
-Acima estão seus componentes básicos, onde "register" é responsável por registrar a propriedade "name" de cada input, para assim termos o controle.
+Acima temos um exemplo de aplicação de tipo a uma variável, para definir um tipo basta utilizar a notação de dois pontos seguida do tipo primitivo que desejar. Como podemos perceber a variável não foi definida ainda, dessa forma se faz necessário tipificá-la, mas quando se define a variável, não é preciso aplicar o tipo como no exemplo, o próprio sistema de tipos do TypeScript utiliza a inferência, esperando que o tipo de dados da variável corresponda ao tipo do valor inicialmente atribuído a ela na declaração. Ou seja, a variável nunca poderá ser reatribuída a um valor de um tipo de dados diferente.
 
 ```js
 ...
-const handleSubmit = () => {
-  navigate("/select-plan")
+const getPokemonById = async (identifier: number | string) => {...}
+...
+```
+
+No entanto, em vários casos precisamos que uma variável possa assumir mais de um tipo, e para tornar o manejo de dados mais flexível, o TypeScript disponibiliza o recurso de união, que nos permitem definir vários membros de tipo permitidos separando cada membro de tipo com um caractere de linha vertical "|".
+
+```js
+...
+type PokemonT = {
+    name: string,
+    id: number,
+    height: number,
+    weight: number,
+    types: [],
+    sprites: {
+        "front_default": string,
+        other: {
+            "official-artwork": {
+                "front_default": string,
+            },
+        },
+    },
+    stats: [],
 }
 ...
-<form onSubmit={onSubmit(handleSubmit)}>...
+function Pokemon({ pokemon }: { pokemon: PokemonT }) {...}
 ...
 ```
 
-"handleSubmit: onSubmit", é uma função que recebe outra função como argumento, responsável pelo controle do submit do formulário. Aqui reatribuímos ela a "onSubmit", para não entrar em conflito com nossa função de mesmo nome, já existente.
+Frequentemente quando precisamos consumir uma API qualquer, precisamos manipular diversos tipos de dados e comumente em formato de objeto, acima temos um exemplo da sintaxe de uma declaração de um tipo de objeto, é bem semelhante a um objeto literal, contudo, o valor de cada propriedade é seu próprio tipo.
 
-```js
-...
-<input className={errors?.name?.message ? 'w-100 p-1 px-2 border border-danger rounded' : 'w-100 border rounded p-1 px-2'}
-  id='name'
-  type='text'
-  placeholder='e.g. Stephen King'
-  {...register('name')}
-/>
-...
-```
+[saiba mais!](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
-"formState: { errors }", formState guarda o estado de todos os elementos registrados e dele, através da atribuição desestruturada, podemos extrair os erros, para assim como no exemplo acima, renderizarmos na página.
-
-```js
-...
-const schema = object({
-  name: string().required("This field is required"),
-  email: string().required("This field is required"),
-  phone: string().required("This field is required"),
-})
-...
-```
-
-"useForm({ resolver: yupResolver(schema) })", a própria biblioteca recomenda outra biblioteca chamada Yup, para estruturar a base de dados do formulário, como um objeto, chamado de "schema". Assim a validação fica mais intuitiva.
-
-[saiba mais!](https://react-hook-form.com/get-started)
-
-</br> -->
+</br>
 
 ## 💻 Rodando o projeto
 

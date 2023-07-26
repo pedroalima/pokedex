@@ -1,26 +1,11 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
 
+import { PokemonT } from "../../types/pokemons";
+
 import "./index.scss"
 
-type PokemonT = {
-    name: string,
-    id: number,
-    height: number,
-    weight: number,
-    types: [],
-    sprites: {
-        "front_default": string,
-        other: {
-            "official-artwork": {
-                "front_default": string,
-            },
-        },
-    },
-    stats: [],
-}
-
-function Pokemon({ pokemon, getPokemonById }: { pokemon: PokemonT, getPokemonById: any }) {
+function Pokemon({ pokemon, getPokemonById }: { pokemon: PokemonT | Record<string, never>, getPokemonById: any }) {
     const { id } = useParams();
 
     useEffect(() => {

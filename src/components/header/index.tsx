@@ -7,7 +7,7 @@ import "./index.scss"
 function Header({ setSearchValue }: { setSearchValue: any }) {
     const navigate = useNavigate()
 
-    const handleChange = (e: { target: { value: any } }) => {
+    const handleChange = (e: { target: { value: string } }) => {
         if (e.target.value !== "") {
             navigate("/search")
             setSearchValue(e.target.value)

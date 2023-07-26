@@ -6,11 +6,11 @@ import Pokemon from "./routes/pokemon";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import { useState, useEffect } from "react";
 
-import { PokemonsProps, AllPokemons } from "./types/pokemons"
+import { PokemonsProps, AllPokemons, PokemonT } from "./types/pokemons"
 
 function App() {
   const [allPokemons, setAllPokemons] = useState<AllPokemons[] | []>([]);
-  const [searchValue, setSearchValue] = useState<any>();
+  const [searchValue, setSearchValue] = useState<string>("");
 
   /*
    * Requests all Pokemons.
@@ -25,7 +25,7 @@ function App() {
       const response = await fetch(`${urlBase}pokemon?limit=900&offset=0`);
       const data = await response.json();
 
-      const promises = data.results.map(async (pokemon: any) => {
+      const promises = data.results.map(async (pokemon: { url: string }) => {
         const response = await fetch(pokemon.url);
         const jsonResponse = await response.json();
         return jsonResponse;
@@ -56,7 +56,7 @@ function App() {
       const response = await fetch(`${urlBase}pokemon?limit=${limit}&offset=${offset}`);
       const data = await response.json();
 
-      const promises = data.results.map(async (pokemon: any) => {
+      const promises = data.results.map(async (pokemon: { url: string }) => {
         const response = await fetch(pokemon.url);
         const jsonResponse = await response.json();
         return jsonResponse;
@@ -73,7 +73,7 @@ function App() {
     void getFirstFiftyPokemons()
   }, [offset])
 
-  const [pokemon, setPokemon] = useState<any | []>([])
+  const [pokemon, setPokemon] = useState<PokemonT | Record<string, never>>({})
 
   /*
    * Requests Pokemon by name or ID.
