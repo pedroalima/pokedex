@@ -99,6 +99,8 @@ Para conferir a versão final é só acessar o link: 💻<https://pokedex-eta-ol
 
 </br>
 
+![#](./public/mobile.gif)
+
 ## Autor
 
 - LinkedIn - [Pedro A. Lima](https://www.linkedin.com/in/pedroalima6/)
